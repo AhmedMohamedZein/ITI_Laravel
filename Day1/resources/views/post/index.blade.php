@@ -5,7 +5,7 @@
 
 <div class="container">
     <div class="text-center">
-        <button type="button" class="mt-4 btn btn-dark">Create Post</button>
+        <a  href="{{route('posts.create')}}"  class="mt-4 btn btn-dark">Create Post</a>
     </div>
     <table class="table mt-4">
         <thead>
@@ -27,8 +27,12 @@
                 <td>{{$post['created_at']}}</td>
                 <td>
                     <a href="{{route('posts.show' , $post['id'])}}" class="btn btn-dark">View</a>
-                    {{-- <a href="{{route('posts.update')}}" class="btn btn-dark">Edit</a> --}}
-                    {{-- <a href="{{route('posts.delete')}}" class="btn btn-danger">Delete</a> --}}
+                    <a href="{{route('posts.edit' , $post['id'])}}" class="btn btn-dark">Edit</a>
+                    <form method="post" action="{{route('posts.destroy', $post['id'])}}">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
                 </td>
             </tr>
         @endforeach

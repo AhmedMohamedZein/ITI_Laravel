@@ -73,12 +73,37 @@ class PostController extends Controller
         return view('post.show' , ['post' => $selectedPost]);
     }
 
-    public function update () {
-        return view ('post.update');
+    public function create () {
+        return view ('post.create');
     }
 
     
-    public function delete () {
-        return view ('post.delete');
+    public function store () {
+        return redirect()->route('posts.index');    
+    }
+
+    
+    public function destroy ($id) {
+        
+        $posts = $this->_allPosts;
+        foreach ($posts as $post) {
+            if ( $post['id'] === intval($id) ) {
+                unset($post);
+                break;
+            }
+        }
+        return redirect()->route('posts.index');
+    }
+
+    public function edit ($id) {
+        
+        return view ('post.edit', ['id' => $id]);
+
+    }
+
+    public function update ($id) {
+        
+        return redirect()->route('posts.index');
+
     }
 }
