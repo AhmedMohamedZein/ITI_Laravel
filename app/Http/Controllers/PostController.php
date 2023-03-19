@@ -58,9 +58,18 @@ class PostController extends Controller
 
     }
 
-    public function update () {
-        
-        return redirect()->route('posts.index' );
+    public function update (Request $request,$id) {
 
+        $title = $request->title ;
+        $description =  $request->description;
+        $content = $request->content;
+
+        Post::where('id' , $id)->update([
+            'title' => $title ,
+            'description' => $description,
+            'content' => $content
+        ]);
+
+        return redirect()->route('posts.index' );
     }
 }
