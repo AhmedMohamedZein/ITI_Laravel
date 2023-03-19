@@ -2,24 +2,34 @@
 
 @section('content')
 
-    <form class="container mt-5" method="post" action="{{route('posts.store')}}">
+    <form class="container mt-5 col-5" method="post" action="{{route('posts.store')}}">
     @csrf
-     <div class="row mb-3">
-            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Email</label>
-        <div class="col-sm-10">
-            <input type="email" class="form-control form-control-sm" id="colFormLabelSm" placeholder="col-form-label-sm">
-        </div>
+        <div class="row mb-3">
+            <label for="colFormLabel"  class="col-sm-2 col-form-label">Title</label>
+            <div class="col-sm-10">
+                <input type="text" name="title"  class="form-control" id="colFormLabel">
+            </div>
         </div>
         <div class="row mb-3">
-        <label for="colFormLabel" class="col-sm-2 col-form-label">Email</label>
-        <div class="col-sm-10">
-            <input type="email" class="form-control" id="colFormLabel" placeholder="col-form-label">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">Description</label>
+            <div class="col-sm-10">
+                <input type="text" name="description" class="form-control" id="colFormLabel">
+            </div>
         </div>
+        <div class="row mb-3">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">Content</label>
+            <div class="col-sm-10">
+                <textarea column =10  name="content" class="form-control" id="colFormLabel"></textarea>
+            </div>
         </div>
-        <div class="row">
-        <label for="colFormLabelLg" class="col-sm-2 col-form-label col-form-label-lg">Email</label>
-        <div class="col-sm-10">
-            <input type="email" class="form-control form-control-lg" id="colFormLabelLg" placeholder="col-form-label-lg">
+        <div class="row mb-3">
+            <select name="postCreator" class="form-select" aria-label="Default select example">
+                <option selected>Who created the post</option>
+                @foreach($users as $user) {
+                    <option value="{{$user->id}}">{{$user->name}}</option>
+                } 
+                @endforeach
+            </select>
         </div>
     </div>
         <button type="submit" class="btn-dark btn"> Create Post </button>

@@ -2,96 +2,55 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    private $_allPosts;
 
-    public function __construct()
-    {
-        $this->_allPosts = [
-            [
-                'id' => 1,
-                'title' => 'Laravel',
-                'posted_by' => 'Ahmed',
-                'created_at' => '2022-08-01 10:00:00',
-                'email' => 'ahmed@gmail.com'
-            ],
-
-            [
-                'id' => 2,
-                'title' => 'PHP',
-                'posted_by' => 'Mohamed',
-                'created_at' => '2022-08-01 10:00:00',
-                'email' => 'Mohamed@gmail.com'
-            ],
-
-            [
-                'id' => 3,
-                'title' => 'Javascript',
-                'posted_by' => 'Ali',
-                'created_at' => '2022-08-01 10:00:00',
-                'email' => 'Ali@gmail.com'
-            ]
-            ,
-
-            [
-                'id' => 4,
-                'title' => 'Java',
-                'posted_by' => 'Saad',
-                'created_at' => '2022-08-01 10:00:00',
-                'email' => 'saad@gmail.com'
-            ]
-            ,
-            [
-                'id' => 5,
-                'title' => 'Shell',
-                'posted_by' => 'Mahmoud',
-                'created_at' => '2022-08-01 10:00:00',
-                'email' => 'Mohmoud@gmail.com'
-            ]
-        ];
-    }
+    public function __construct() { }
 
     public function index () {
-        $posts = $this->_allPosts;
-        return view('post.index',['posts' => $posts]);
+        
+        $allPosts = Post::all();
+        return view('post.index',['posts' => $allPosts]);
     }
 
     public function show ($id) { 
         
-        $posts = $this->_allPosts;
         $selectedPost = NULL ;
-        foreach ($posts as $post) {
-            if ( $post['id'] === intval($id) ) {
-                $selectedPost = $post ;
-                break;
-            }
-        }
+
 
         return view('post.show' , ['post' => $selectedPost]);
     }
 
     public function create () {
-        return view ('post.create');
+
+        $allUsers = User::all();
+        return view ('post.create',['users' => $allUsers]);
     }
 
     
-    public function store () {
+    public function store (Request $request) {
+
+        $title = $request->title ;
+        $description =  $request->description;
+        $content = $request->content;
+        $postCreator = $request->input('postCreator');
+        Post::create([
+            'title' => $title ,
+            'description' => $description,
+            'content' => $content,
+            'user_id' =>  $postCreator 
+        ]);
+
         return redirect()->route('posts.index');    
     }
 
     
     public function destroy ($id) {
         
-        $posts = $this->_allPosts;
-        foreach ($posts as $post) {
-            if ( $post['id'] === intval($id) ) {
-                unset($post);
-                break;
-            }
-        }
         return redirect()->route('posts.index');
     }
 

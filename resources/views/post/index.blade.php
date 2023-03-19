@@ -21,10 +21,10 @@
 
         @foreach($posts as $post)
             <tr>
-                <td>{{$post['id']}}</td>
-                <td>{{$post['title']}}</td>
-                <td>{{$post['posted_by']}}</td>
-                <td>{{$post['created_at']}}</td>
+                <td>{{$post->id}}</td>
+                <td>{{$post->title}}</td>
+                <td>{{$post->user->name}}</td>
+                <td>{{$post->updated_at->format('d/m/Y')}}</td>
                 <td class="d-flex gap-2">
                     <a href="{{route('posts.show' , $post['id'])}}" class="btn btn-dark">View</a>
                     <a href="{{route('posts.edit' , $post['id'])}}" class="btn btn-dark">Edit</a>

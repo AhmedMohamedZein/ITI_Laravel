@@ -9,15 +9,14 @@
             Post info
         </div>
         <div class="card-body  d-flex flex-column gap-1">
-            <h5 class="card-title">
-                <h5 class="fw-bold">Title :  </h5> 
+            <div class="d-flex gap-2">
+                <h6 class="fw-bold">Title:  </h6> 
                 <span> Special title treatment</span> 
-            </h5>
-            
-            <h5 class="card-title">
-                <h5 class="fw-bold">Description :  </h5> 
+            </div>
+            <div class="d-flex gap-2">
+                <h6 class="fw-bold">Description:  </h6> 
                 <span> With supporting text below as a natural lead-in to additional content</span> 
-            </h5>
+            </div>
         </div>
     </div>
 
@@ -35,8 +34,8 @@
                 <span>{{$post['email']}}</span>
             </div>
             <div class="d-flex gap-2">
-                <h6 class="card-title fw-bold">Created At: </h6>
-                <span>{{$post['created_at']}}</span>
+                <h6 class="card-title fw-bold">Created at: </h6>
+                <span>{{$post['updated_at']}}</span>
             </div>
         </div>
     </div>
