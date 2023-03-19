@@ -7,8 +7,8 @@
     <title>Index</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"></head>
 
-<body style="background-color :   #9DC08B !important">
-<nav class="navbar navbar-expand-lg navbar-light " style="background-color : #609966 !important"> 
+<body>
+<nav class="navbar navbar-expand-lg navbar-light "> 
     <div class="container-fluid">
         <a class="navbar-brand fw-bold" href="#">Blog Post</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">

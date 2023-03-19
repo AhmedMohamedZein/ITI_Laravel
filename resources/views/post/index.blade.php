@@ -25,7 +25,7 @@
                 <td>{{$post['title']}}</td>
                 <td>{{$post['posted_by']}}</td>
                 <td>{{$post['created_at']}}</td>
-                <td>
+                <td class="d-flex gap-2">
                     <a href="{{route('posts.show' , $post['id'])}}" class="btn btn-dark">View</a>
                     <a href="{{route('posts.edit' , $post['id'])}}" class="btn btn-dark">Edit</a>
                     <form method="post" action="{{route('posts.destroy', $post['id'])}}">
