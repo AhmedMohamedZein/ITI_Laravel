@@ -45,3 +45,7 @@
 </div>
 
 @endsection
+
+@push('scripts')
+    <script src="resources/js/confirmDelete.js"></script>
+@endpush
