@@ -3,6 +3,7 @@
 @section('content')
 
 
+
 <div class="container">
     <div class="text-center">
         <a  href="{{route('posts.create')}}"  class="mt-4 btn btn-dark">Create Post</a>
@@ -21,7 +22,7 @@
 
         @foreach($posts as $post)
             <tr>
-                <td>{{$post->id}}</td>
+                <td id="id" data-message="{{ $post->id }}">{{$post->id}}</td>
                 <td>{{$post->title}}</td>
                 <td>{{$post->user->name}}</td>
                 <td>{{$post->updated_at->format('d/m/Y')}}</td>
@@ -31,7 +32,7 @@
                     <form method="post" action="{{route('posts.destroy', $post['id'])}}">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Delete</button>
+                        <button id="delete-btn" type="submit" class="btn btn-danger">Delete</button>
                     </form>
                 </td>
             </tr>
@@ -43,9 +44,8 @@
     </table>
 
 </div>
-
 @endsection
 
-@push('scripts')
-    <script src="resources/js/confirmDelete.js"></script>
+@push('script')
+    <script type="text/javascript" src="{{ asset('/js/confirmDelete.js') }}"></script>
 @endpush

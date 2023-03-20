@@ -47,10 +47,8 @@ class PostController extends Controller
     }
 
     
-    public function destroy (Request $request , $id) {
-        
+    public function destroy ($id) {
         Post::where('id' , $id)->delete();
-
         return redirect()->route('posts.index');
     }
 
