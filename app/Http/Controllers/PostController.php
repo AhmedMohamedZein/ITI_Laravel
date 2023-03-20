@@ -6,6 +6,7 @@ use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 
+
 class PostController extends Controller
 {
 
@@ -13,7 +14,7 @@ class PostController extends Controller
 
     public function index () {
         
-        $allPosts = Post::all();
+        $allPosts = Post::with('user')->simplePaginate(3);
         return view('post.index',['posts' => $allPosts]);
     }
 

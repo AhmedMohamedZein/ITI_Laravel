@@ -38,10 +38,28 @@
             </tr>
         @endforeach
 
-
-
         </tbody>
     </table>
+    <!--Nav Bar-->
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            @if ($posts->onFirstPage())
+            <li class="page-item disabled"><span class="page-link">Previous</span></li>
+            @else
+            <li class="page-item"><a class="page-link" href="{{ $posts->previousPageUrl() }}">Previous</a></li>
+            @endif
+            
+            @foreach ($posts->getUrlRange($posts->currentPage() - 2, $posts->currentPage() + 2) as $page => $url)
+            <li class="page-item {{ $page == $posts->currentPage() ? 'active' : '' }}"><a class="page-link" href="{{ $url }}">{{ $page }}</a></li>
+            @endforeach
+            
+            @if ($posts->hasMorePages())
+            <li class="page-item"><a class="page-link" href="{{$posts->nextPageUrl() }}">Next</a></li>
+            @else
+            <li class="page-item disabled"><span class="page-link">Next</span></li>
+            @endif
+        </ul>
+    </nav>
 
 </div>
 @endsection
