@@ -29,11 +29,7 @@
                 <td class="d-flex gap-2">
                     <a href="{{route('posts.show' , $post['id'])}}" class="btn btn-dark">View</a>
                     <a href="{{route('posts.edit' , $post['id'])}}" class="btn btn-dark">Edit</a>
-                    <form method="post" action="{{route('posts.destroy', $post['id'])}}">
-                        @csrf
-                        @method('DELETE')
-                        <button id="delete-btn" type="submit" class="btn btn-danger">Delete</button>
-                    </form>
+                    <button id="delete-btn" type="submit" class="btn btn-danger">Delete</button>
                 </td>
             </tr>
         @endforeach
@@ -48,11 +44,11 @@
             @else
             <li class="page-item"><a class="page-link" href="{{ $posts->previousPageUrl() }}">Previous</a></li>
             @endif
-            
+
             @foreach ($posts->getUrlRange($posts->currentPage() - 2, $posts->currentPage() + 2) as $page => $url)
             <li class="page-item {{ $page == $posts->currentPage() ? 'active' : '' }}"><a class="page-link" href="{{ $url }}">{{ $page }}</a></li>
             @endforeach
-            
+
             @if ($posts->hasMorePages())
             <li class="page-item"><a class="page-link" href="{{$posts->nextPageUrl() }}">Next</a></li>
             @else
