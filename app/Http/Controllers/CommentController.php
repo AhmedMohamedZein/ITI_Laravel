@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use App\Models\Post;
 
@@ -11,13 +12,14 @@ class CommentController extends Controller
 
         $post = Post::find($request->post_id);
         $post->comments()->create([
-            'message' => $request->post_id 
+            'message' => $request->comment 
         ]);
 
-        return redirect()->route('/posts/{'.$request->post_id.'}');
+        return redirect()->route('posts.show',$request->post_id);
     }
 
-    public function destroy ($id) {
-        //delete Comment
+    public function destroy (Request $request , $id) { // id is comment id 
+        Comment::where('id' , $id)->delete();
+        return redirect()->route('posts.show',$request->post_id);
     }
 }

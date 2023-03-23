@@ -59,11 +59,17 @@
         </div>
         @foreach($comments as $comment)
         <div class="card-body  d-flex flex-column gap-1">
-            <div class="d-flex gap-2">
-                <h6 class="card-title fw-bold">Name: </h6>
+            <div class="d-flex justify-content-between">
                 <span>{{$comment->message}}</span>
+                <form action={{route('comments.destroy',$comment->id)}} method="post">
+                    @csrf
+                    @method('delete')
+                    <input class="d-none" name="post_id" value={{$post->id}}>
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
             </div>
         </div>
+        <hr>
         @endforeach
     </div>
 
