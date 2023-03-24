@@ -23,7 +23,7 @@
 
         @foreach($posts as $post)
             <tr>
-                <td id="id" data-message="{{ $post->id }}">{{$post->id}}</td>
+                <td>{{$post->id}}</td>
                 <td>{{$post->title}}</td>
                 <td>{{$post->user->name}}</td>
                 <td>{{$post->updated_at->format('d/m/Y')}}</td>
@@ -31,11 +31,7 @@
                 <td class="d-flex gap-2">
                     <a href="{{route('posts.show' , $post['id'])}}" class="btn btn-dark">View</a>
                     <a href="{{route('posts.edit' , $post['id'])}}" class="btn btn-dark">Edit</a>
-                    <form method="post" action={{route('posts.destroy',$post['id'])}}>
-                        @csrf
-                        @method('DELETE')
-                        <button id="delete-btn" type="submit" class="btn btn-danger">Delete</button>
-                    </form>
+                    <button class="btn btn-danger delete-btn" data-post-id="{{$post->id}}">Delete</button>
                 </td>
             </tr>
         @endforeach
@@ -66,6 +62,6 @@
 </div>
 @endsection
 
-{{-- @push('script')
+@push('script')
     <script type="text/javascript" src="{{ asset('/js/confirmDelete.js') }}"></script>
-@endpush --}}
+@endpush
