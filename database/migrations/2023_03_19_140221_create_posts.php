@@ -20,7 +20,7 @@ return new class extends Migration
             $table->timestamp('updated_at')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->string('slug')->nullable();
-            
+            $table->string('img_src')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
         });
     }

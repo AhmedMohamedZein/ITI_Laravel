@@ -12,25 +12,29 @@
         </div>
     @endif
 
-    <form class="container mt-5 col-5" method="post" action="{{route('posts.store')}}">
+    <form class="container mt-5 col-5" method="post" action="{{route('posts.store')}}" enctype="multipart/form-data">
     @csrf
         <div class="row mb-3">
-            <label for="colFormLabel"  class="col-sm-2 col-form-label">Title</label>
+            <label for="colFormLabel"  class="col-sm-2 col-form-label fw-bold">Title</label>
             <div class="col-sm-10">
                 <input type="text" name="title"  class="form-control" id="colFormLabel"  value="{{ old('title') }}">
             </div>
         </div>
         <div class="row mb-3">
-            <label for="colFormLabel" class="col-sm-2 col-form-label">Description</label>
+            <label for="colFormLabel" class="col-sm-2 col-form-label fw-bold">Description</label>
             <div class="col-sm-10">
                 <input type="text" name="description" class="form-control" id="colFormLabel"  value="{{ old('description') }}">
             </div>
         </div>
         <div class="row mb-3">
-            <label for="colFormLabel" class="col-sm-2 col-form-label">Content</label>
+            <label for="colFormLabel" class="col-sm-2 col-form-label fw-bold">Content</label>
             <div class="col-sm-10">
                 <textarea column =10  name="content" class="form-control" id="colFormLabel">{{ old('content') }}</textarea>
             </div>
+        </div>
+        <div class="col-7 mb-3">
+            <label for="formFileReadonly" class="form-label fw-bold">Upload image</label>
+                <input class="form-control" name="file" type="file" id="formFileReadonly">
         </div>
         <div class="row mb-3">
             <select name="postCreator" class="form-select" aria-label="Default select example">

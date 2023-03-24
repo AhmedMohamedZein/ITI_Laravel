@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 
 class PostController extends Controller
 {
@@ -44,11 +43,15 @@ class PostController extends Controller
         $description =  $request->description;
         $content = $request->content;
         $postCreator = $request->input('postCreator');
+
+        $file = $request->file('file')->store('images'); // type="file" from the view
+        //then we will use the store() method to store the data in the file system 
         Post::create([
             'title' => $title ,
             'description' => $description,
             'content' => $content,
-            'user_id' =>  $postCreator
+            'user_id' =>  $postCreator,
+            'img_src' => $file
         ]);
 
         return redirect()->route('posts.index');
