@@ -41,7 +41,6 @@
                 @endforeach
             </select>
         </div>
-    </div>
         <button type="submit" class="btn-dark btn"> Create Post </button>
     </form>
 
