@@ -15,7 +15,6 @@ use  App\Http\Controllers\PostController;
 |
 */
 
-
 Route::get('/posts', [PostController::class , 'index'])->name('posts.index');
 Route::get('/posts/create', [PostController::class , 'create'])->name('posts.create');
 Route::post('/posts', [PostController::class , 'store'])->name('posts.store');
@@ -28,3 +27,7 @@ Route::delete('/posts/{post}', [PostController::class , 'destroy'])->name('posts
 // Comments Route
 Route::post('/comments',[CommentController::class,'store'] )->name('comments.store');
 Route::delete('comments/{id}', [CommentController::class, 'destroy'])->name('comments.destroy');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -13,7 +13,6 @@ class PostController extends Controller
     public function __construct() { }
 
     public function index () {
-
         $allPosts = Post::with('user')->simplePaginate(3);
         return view('post.index',['posts' => $allPosts]);
     }
