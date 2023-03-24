@@ -35,6 +35,12 @@ class PostController extends Controller
 
     public function store (Request $request) {
 
+        $request->validate([
+            'title' => ['required', 'min:3','unique:posts'],
+            'description' => ['required' , 'min:10'],
+            'content' => ['required']
+        ]);
+
         $title = $request->title ;
         $description =  $request->description;
         $content = $request->content;
