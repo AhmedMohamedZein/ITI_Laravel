@@ -20,7 +20,7 @@ class PostController extends Controller
 
     public function show ($post) {
 
-        $selectedPost = Post::find($post);
+        $selectedPost = Post::findOrFail($post);
         $comments =  $selectedPost->comments;
         return view('post.show' , ['post' => $selectedPost , 'comments' => $comments]);
     }
@@ -70,17 +70,20 @@ class PostController extends Controller
 
     }
 
-    public function update (Request $request,$post) {
+    public function update (Request $request,$id) {
 
-        $title = $request->title ;
-        $description =  $request->description;
-        $content = $request->content;
+        $post = Post::findOrFail($id); // will throw an exiption that will handel id of post creator that doesn’t exist in the database
 
-        Post::where('id' , $post)->update([
-            'title' => $title ,
-            'description' => $description,
-            'content' => $content
+        $validatedData = $request->validate([
+            'description' => ['required' , 'min:10'],
+            'content' => ['required']
         ]);
+        
+        if (!$request->filled('title')) {
+            $validatedData['title'] = $post->title; // if the user didn't fill the filed title use the old one 
+        }
+       
+        $post->update($validatedData); // insert the changes 
 
         return redirect()->route('posts.index');
     }
