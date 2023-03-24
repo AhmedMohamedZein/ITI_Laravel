@@ -29,7 +29,11 @@
                 <td class="d-flex gap-2">
                     <a href="{{route('posts.show' , $post['id'])}}" class="btn btn-dark">View</a>
                     <a href="{{route('posts.edit' , $post['id'])}}" class="btn btn-dark">Edit</a>
-                    <button id="delete-btn" type="submit" class="btn btn-danger">Delete</button>
+                    <form method="post" action={{route('posts.destroy',$post['id'])}}>
+                        @csrf
+                        @method('DELETE')
+                        <button id="delete-btn" type="submit" class="btn btn-danger">Delete</button>
+                    </form>
                 </td>
             </tr>
         @endforeach
@@ -60,6 +64,6 @@
 </div>
 @endsection
 
-@push('script')
+{{-- @push('script')
     <script type="text/javascript" src="{{ asset('/js/confirmDelete.js') }}"></script>
-@endpush
+@endpush --}}

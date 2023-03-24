@@ -50,8 +50,11 @@ class PostController extends Controller
     }
 
 
-    public function destroy ($post) { // problem here
-        Post::where('id' , $post)->delete();
+    public function destroy ($id) { // problem here
+        
+        $post = Post::where('id' , $id)->first(); 
+        $post->comments()->delete();
+        $post->delete();
         return redirect()->route('posts.index');
     }
 
