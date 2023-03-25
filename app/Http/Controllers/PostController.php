@@ -60,7 +60,7 @@ class PostController extends Controller
     }
 
 
-    public function destroy ($id) { // problem here
+    public function destroy ($id) { 
         
         $post = Post::where('id' , $id)->first(); 
         $post->comments()->delete();
