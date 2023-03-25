@@ -28,7 +28,7 @@ class Post extends Model
         return $this->morphMany(Comment::class , 'commentable');
     }
 
-        public function sluggable(): array {
+    public function sluggable(): array {
         return [
             'slug' => [
                 'source' => 'title'

@@ -69,10 +69,9 @@ class PostController extends Controller
         return redirect()->route('posts.index');
     }
 
-    public function edit ($post) {
-
-        return view ('post.edit', ['id' => $post]);
-
+    public function edit ($id) {
+        $post = Post::findOrFail($id);
+        return view ('post.edit', ['post' => $post]);
     }
 
     public function update (Request $request,$id) {
