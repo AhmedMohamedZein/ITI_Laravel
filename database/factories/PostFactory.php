@@ -1,7 +1,8 @@
 <?php
 
 namespace Database\Factories;
-
+use App\Models\Post;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,10 +17,12 @@ class PostFactory extends Factory
      */
     public function definition(): array
     {
+        $userId = User::inRandomOrder()->value('id');
         return [
             'title' => fake()->title(),
             'description' => fake()->text(10),
-            'content' => fake()->text(70)
+            'content' => fake()->text(70),
+            'user_id' =>  $userId
         ];
     }
 }
