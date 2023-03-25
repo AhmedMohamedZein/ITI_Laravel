@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Support\Facades\Storage;
 
 class Post extends Model
 {
@@ -33,5 +34,10 @@ class Post extends Model
                 'source' => 'title'
             ]
         ];
+    }
+
+    public function deleteImage() {
+        $result = 'public/'.$this->img_src;
+        Storage::delete($result);
     }
 }

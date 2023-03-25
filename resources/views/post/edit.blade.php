@@ -33,6 +33,10 @@
                 <textarea column =10  name="content" class="form-control" id="colFormLabel"></textarea>
             </div>
         </div>
+        <div class="col-7 mb-3">
+            <label for="formFileReadonly" class="form-label fw-bold">Upload image</label>
+                <input class="form-control" name="file" type="file" id="formFileReadonly">
+        </div>
         <button type="submit" class="btn-dark btn"> Edit Post </button>
     </form>
 
