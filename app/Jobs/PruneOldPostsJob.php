@@ -8,7 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-
+use App\Models\Post;
 class PruneOldPostsJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
@@ -26,6 +26,6 @@ class PruneOldPostsJob implements ShouldQueue
      */
     public function handle(): void
     {
-        //
+       Post::where('create_at','<=' , now()->subYear(2) )->delete();
     }
 }
