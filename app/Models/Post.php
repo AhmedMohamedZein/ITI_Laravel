@@ -10,8 +10,10 @@ use Illuminate\Support\Facades\Storage;
 class Post extends Model
 {
     use HasFactory;
-    use Sluggable;    
-        protected $fillable = [
+    use Sluggable;
+    public $timestamps = true;
+
+    protected $fillable = [
         'title',
         'description',
         'content',

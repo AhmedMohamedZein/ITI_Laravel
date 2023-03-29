@@ -32,3 +32,4 @@ Route::delete('comments/{id}', [CommentController::class, 'destroy'])->name('com
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+

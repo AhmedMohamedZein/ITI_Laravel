@@ -9,7 +9,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use HasFactory;
-    
+    public $timestamps = true;
+
     protected $fillable = [
         'name',
         'email',

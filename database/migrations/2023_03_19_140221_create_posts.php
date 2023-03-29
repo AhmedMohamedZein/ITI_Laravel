@@ -16,12 +16,11 @@ return new class extends Migration
             $table->string('title');
             $table->string('description');
             $table->text('content');
-            $table->timestamp('created_at');
-            $table->timestamp('updated_at')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->string('slug')->nullable();
             $table->string('img_src')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
+            $table->timestamps();
         });
     }
 
