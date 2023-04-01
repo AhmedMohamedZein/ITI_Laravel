@@ -57,7 +57,7 @@
                                     {{ __('Login') }}
                                 </button>
 
-                                <a href="#" class="btn btn-dark">
+                                <a href="{{route('github')}}" class="btn btn-dark">
                                     {{ __('Login with GitHub') }}
                                 </a>
 

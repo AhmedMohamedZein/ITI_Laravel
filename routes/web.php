@@ -3,7 +3,8 @@
 use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
 use  App\Http\Controllers\PostController;
-
+use Laravel\Socialite\Facades\Socialite;
+use App\Models\User;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,3 +34,20 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/auth/github', function () {
+    return Socialite::driver('github')->redirect();
+})->name('github');
+
+Route::get('/auth/callback', function () {
+    $githubUser = Socialite::driver('github')->user();
+    $user = User::updateOrCreate([
+        'github_id' => $githubUser->id, // here the ORM will check if this id exists in my database, if exists it wil update it
+    ], [    // if not exists it will create it
+        'name' => $githubUser->name,
+        'email' => $githubUser->email,
+        'github_token' => $githubUser->token,
+        'github_refresh_token' => $githubUser->refreshToken,
+    ]);
+
+    Auth::login($user); // Here we say that the user is logedin in the system
+});
