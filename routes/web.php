@@ -34,11 +34,17 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/auth/github', function () {
-    return Socialite::driver('github')->redirect();
-})->name('github');
 
-Route::get('/auth/callback', function () {
+Route::get('/auth/{service}', function ($service) {
+    if ($service == 'github') {
+        return Socialite::driver('github')->redirect();
+    }
+    elseif ($service == 'google') {
+        return Socialite::driver('google')->redirect();
+    }
+})->name('service');
+
+Route::get('/auth/callback/github', function () {
 
     $githubUser = Socialite::driver('github')->user();
     $user = User::updateOrCreate([
@@ -48,6 +54,21 @@ Route::get('/auth/callback', function () {
         'email' => $githubUser->email,
         'service_token' => $githubUser->token,
         'service_refresh_token' => $githubUser->refreshToken,
+    ]);
+    Auth::login($user); // Here we say that the user is logedin in the system
+    return redirect()->route('posts.index');
+});
+
+Route::get('/auth/callback/google', function () {
+
+    $googleUser = Socialite::driver('google')->user();
+    $user = User::updateOrCreate([
+        'service_user_id' => $googleUser->id, // here the ORM will check if this id exists in my database, if exists it wil update it
+    ], [    // if not exists it will create it
+        'name' => $googleUser->name,
+        'email' => $googleUser->email,
+        'service_token' => $googleUser->token,
+        'service_refresh_token' => $googleUser->refreshToken,
     ]);
     Auth::login($user); // Here we say that the user is logedin in the system
     return redirect()->route('posts.index');

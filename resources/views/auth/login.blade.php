@@ -57,11 +57,11 @@
                                     {{ __('Login') }}
                                 </button>
 
-                                <a href="{{route('github')}}" class="btn btn-dark">
+                                <a href="{{route('service','github')}}" class="btn btn-dark">
                                     {{ __('Login with GitHub') }}
                                 </a>
 
-                                <a href="#" class="btn btn-dark">
+                                <a href="{{route('service','google')}}" class="btn btn-dark">
                                     {{ __('Login with Google') }}
                                 </a>
 
