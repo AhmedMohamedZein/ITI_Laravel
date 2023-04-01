@@ -39,15 +39,16 @@ Route::get('/auth/github', function () {
 })->name('github');
 
 Route::get('/auth/callback', function () {
+
     $githubUser = Socialite::driver('github')->user();
     $user = User::updateOrCreate([
-        'github_id' => $githubUser->id, // here the ORM will check if this id exists in my database, if exists it wil update it
+        'service_user_id' => $githubUser->id, // here the ORM will check if this id exists in my database, if exists it wil update it
     ], [    // if not exists it will create it
         'name' => $githubUser->name,
         'email' => $githubUser->email,
-        'github_token' => $githubUser->token,
-        'github_refresh_token' => $githubUser->refreshToken,
+        'service_token' => $githubUser->token,
+        'service_refresh_token' => $githubUser->refreshToken,
     ]);
-
     Auth::login($user); // Here we say that the user is logedin in the system
+    return redirect()->route('posts.index');
 });
