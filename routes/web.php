@@ -24,17 +24,20 @@ Route::group(['middleware' => ['auth'] ], function () {
     Route::get('/posts/{post}/edit', [PostController::class , 'edit'])->name('posts.edit');
     Route::put('/posts/{post}', [PostController::class , 'update'])->name('posts.update');
     Route::delete('/posts/{post}', [PostController::class , 'destroy'])->name('posts.destroy');
+    // Comments Route
+    Route::post('/comments',[CommentController::class,'store'] )->name('comments.store');
+    Route::delete('comments/{id}', [CommentController::class, 'destroy'])->name('comments.destroy');
 });
 
-// Comments Route
-Route::post('/comments',[CommentController::class,'store'] )->name('comments.store');
-Route::delete('comments/{id}', [CommentController::class, 'destroy'])->name('comments.destroy');
+
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-
+Route::post('/logout', function () {
+        Auth::logout();
+        return view ('auth.login');
+})->name('logout');
 Route::get('/auth/{service}', function ($service) {
     if ($service == 'github') {
         return Socialite::driver('github')->redirect();
