@@ -1,5 +1,5 @@
 @extends('layouts.app')
-    
+
 @section('content')
         {{-- @dd($post)     --}}
         @if ($errors->any())
@@ -11,7 +11,7 @@
             </ul>
         </div>
     @endif
-    
+
     <form class="container mt-5 col-5" action="{{route('posts.update', $post->id)}}" method="POST">
     @csrf
     @method('put')
